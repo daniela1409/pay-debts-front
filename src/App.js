@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import BanksList from './screens/BanksList';
+import Login from './screens/Login';
+import firebaseapp from './firebase-config';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+const auth = getAuth(firebaseapp);
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  onAuthStateChanged(auth, (userFirebase) => {
+    if(userFirebase){
+      setUser(userFirebase);
+    }
+    else{
+      setUser(null);
+    }
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      { user ? <BanksList/> : <Login/>}
     </div>
   );
 }
