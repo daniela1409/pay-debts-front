@@ -12,7 +12,10 @@ function App() {
 
   onAuthStateChanged(auth, (userFirebase) => {
     if(userFirebase){
-      setUser(userFirebase);
+      const userData = {uid: userFirebase.uid,
+        email: userFirebase.email};
+
+      setUser(userData);
     }
     else{
       setUser(null);

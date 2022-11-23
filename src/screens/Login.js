@@ -12,8 +12,8 @@ function Login() {
         const email = e.target.elements.email.value;
         const password = e.target.elements.password.value;
 
-        signInWithEmailAndPassword(auth, email, password);
-        console.log(email, password);
+        const response = signInWithEmailAndPassword(auth, email, password);
+        
     }
   return (
     <div>
@@ -23,13 +23,13 @@ function Login() {
                 <label>
                     Correo electrónico
                 </label>
-                <input type="email" id="email"></input>
+                <input type="email" id="email" required></input>
             </div>
             <div>
                 <label>
                     Contraseña:
                 </label>
-                <input type="password" id="password"></input>
+                <input type="password" id="password" required></input>
             </div>
             <input type="submit" id="initSession" value = "Iniciar sesión"/>    
         </form>
