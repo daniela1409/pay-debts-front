@@ -1,10 +1,8 @@
 import React, { Component, useEffect, useState } from 'react';
-
-import firebaseapp from '../firebase-config';
-import { getAuth, signOut } from "firebase/auth";
 import axios from 'axios';
 import Card from '../components/card';
-import BankService from '../services/BankService';
+import firebaseapp from '../firebase-config';
+import { getAuth, signOut } from "firebase/auth";
 
 const auth = getAuth(firebaseapp);
 

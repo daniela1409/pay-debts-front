@@ -33,8 +33,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={user ? <BanksList /> : <Login />} />
-          <Route path="/debt/:id" element={<DebtsList />} />
-          <Route path="/debt/detail/:id" element={<DebtDetail />} />
+          <Route path="/debt/:id" element={user ? <DebtsList /> : <Login />} />
+          <Route path="/debt/detail/:id" element={user ? <DebtDetail /> : <Login />} />
           {/* <Route path="/note/save" element={<FormNote/>}/>
           <Route path="/note/download" element={<DownloadJSON/>}/> */}
         </Routes>
