@@ -7,6 +7,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DebtsList from './screens/DebtsList';
 import DebtDetail from './screens/DebtsDetail';
+import { DataProvider } from './context/DataContext';
 
 const auth = getAuth(firebaseapp);
 
@@ -17,7 +18,8 @@ function App() {
     if (userFirebase) {
       const userData = {
         uid: userFirebase.uid,
-        email: userFirebase.email
+        email: userFirebase.email,
+        accessToken: userFirebase.accessToken
       };
 
       setUser(userData);
@@ -25,21 +27,24 @@ function App() {
     else {
       setUser(null);
     }
+    console.log(user);
   });
 
   return (
-    <div className="App">
-      {/* { user ? <BanksList/> : <Login/>} */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={user ? <BanksList /> : <Login />} />
-          <Route path="/debt/:id" element={user ? <DebtsList /> : <Login />} />
-          <Route path="/debt/detail/:id" element={user ? <DebtDetail /> : <Login />} />
-          {/* <Route path="/note/save" element={<FormNote/>}/>
-          <Route path="/note/download" element={<DownloadJSON/>}/> */}
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <DataProvider>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={user ? <BanksList /> : <Login />} />
+            <Route path="/debt/:id" element={user ? <DebtsList /> : <Login />} />
+            <Route path="/debt/detail/:id" element={user ? <DebtDetail /> : <Login />} />
+            {/* <Route path="/note/save" element={<FormNote/>}/>
+            <Route path="/note/download" element={<DownloadJSON/>}/> */}
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </DataProvider>
+    
   );
 }
 

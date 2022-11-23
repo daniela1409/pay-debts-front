@@ -13,7 +13,7 @@ function Login() {
         const password = e.target.elements.password.value;
 
         const response = signInWithEmailAndPassword(auth, email, password);
-        
+        // console.log(response.data)
     }
     return (
         <div>

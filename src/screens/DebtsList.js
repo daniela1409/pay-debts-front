@@ -1,9 +1,10 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import CardDebts from '../components/cardDebts';
 import firebaseapp from '../firebase-config';
 import { getAuth, signOut } from "firebase/auth";
+import { DataContext } from '../context/DataContext';
 
 const auth = getAuth(firebaseapp);
 
@@ -11,7 +12,7 @@ function DebtsList() {
 
   const location = useLocation();
   const bank = location.state.bank;
-  //const debts = bank.debts;
+  const { users } = useContext (DataContext);
 
   const [debts, setDebts] = useState([]);
 
@@ -19,7 +20,7 @@ function DebtsList() {
 
     const getBanks = async () => {
 
-      const url = 'http://localhost:8080/debt/' + 'psX5PbFyD2ecmchB2pbMnFIycHP2' + '/' + bank.id;
+      const url = 'http://localhost:8080/debt/' + users.uid + '/' + bank.id;
       const result = await axios.get(url);
 
       setDebts(result.data);

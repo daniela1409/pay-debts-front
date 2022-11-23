@@ -1,20 +1,24 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from '../components/card';
 import firebaseapp from '../firebase-config';
 import { getAuth, signOut } from "firebase/auth";
+import { DataContext } from '../context/DataContext';
 
 const auth = getAuth(firebaseapp);
 
 function BanksList() {
 
+    const { users } = useContext (DataContext);
+
+    //console.log(users);
     const [banks, setBanks] = useState([]);
 
     useEffect(() => {
 
         const getBanks = async () => {
 
-            const url = 'http://localhost:8080/bank/psX5PbFyD2ecmchB2pbMnFIycHP2';
+            const url = 'http://localhost:8080/bank/' + users.uid;
             const result = await axios.get(url);
 
             setBanks(result.data);
