@@ -12,17 +12,29 @@ export const DataProvider = ({ children }) =>{
     const [users, setUsers] = useState(null);
 
     onAuthStateChanged(auth, (userFirebase) => {
-        if (userFirebase) {
-        const userData = {
-            uid: userFirebase.uid,
-            email: userFirebase.email
-        };
-
-        setUsers(userData);
-        }
-        else {
-        setUsers(null);
-        }
+         // <------ Check this line
+        if(!users !== !userFirebase) {
+            if(!userFirebase) {
+                setUsers(null);
+                return;    
+            }
+            const idToken = userFirebase.getIdToken().then(function(idToken) {
+                const userData = {uid: userFirebase.uid, email: userFirebase.email, idToken: idToken};
+                setUsers(userData);
+            });
+            
+            }
+            console.log(users);
+        
+        // if(!users !== !userFirebase) {
+        //   if(!userFirebase) {
+        //     setUsers(null);
+        //     return;    
+        //   }
+        //   const userData = {uid: userFirebase.uid, email: userFirebase.email};
+        //   setUsers(userData);
+        // }
+        // console.log(users);
     });
     
     return(

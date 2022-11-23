@@ -15,19 +15,16 @@ function App() {
   const [user, setUser] = useState(null);
 
   onAuthStateChanged(auth, (userFirebase) => {
-    if (userFirebase) {
-      const userData = {
-        uid: userFirebase.uid,
-        email: userFirebase.email,
-        accessToken: userFirebase.accessToken
-      };
-
+    
+    if(!user !== !userFirebase) {
+      if(!userFirebase) {
+        setUser(null);
+        return;    
+      }
+      const userData = {uid: userFirebase.uid, email: userFirebase.email};
       setUser(userData);
+      
     }
-    else {
-      setUser(null);
-    }
-    console.log(user);
   });
 
   return (

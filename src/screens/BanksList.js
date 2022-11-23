@@ -19,7 +19,7 @@ function BanksList() {
         const getBanks = async () => {
 
             const url = 'http://localhost:8080/bank/' + users.uid;
-            const result = await axios.get(url);
+            const result = await axios.get(url,);
 
             setBanks(result.data);
 
