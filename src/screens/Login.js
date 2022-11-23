@@ -15,26 +15,26 @@ function Login() {
         const response = signInWithEmailAndPassword(auth, email, password);
         
     }
-  return (
-    <div>
-        <h1>Login</h1>
-        <form onSubmit={submitHandler}>
-            <div>
-                <label>
-                    Correo electrónico
-                </label>
-                <input type="email" id="email" required></input>
-            </div>
-            <div>
-                <label>
-                    Contraseña:
-                </label>
-                <input type="password" id="password" required></input>
-            </div>
-            <input type="submit" id="initSession" value = "Iniciar sesión"/>    
-        </form>
-    </div>
-  )
+    return (
+        <div>
+            <h1>Login</h1>
+            <form onSubmit={submitHandler}>
+                <div>
+                    <label>
+                        Correo electrónico
+                    </label>
+                    <input type="email" id="email" required></input>
+                </div>
+                <div>
+                    <label>
+                        Contraseña:
+                    </label>
+                    <input type="password" id="password" required></input>
+                </div>
+                <input type="submit" id="initSession" value = "Iniciar sesión"/>    
+            </form>
+        </div>
+    )
 }
 
 export default Login
